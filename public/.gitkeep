@@ -1,0 +1,9 @@
+# Public Assets
+
+Place your static assets (images, fonts, etc.) in this directory.
+
+Files in this directory will be served at the root path `/`.
+
+Example:
+- `public/logo.png` → `/logo.png`
+- `public/images/product.jpg` → `/images/product.jpg`
