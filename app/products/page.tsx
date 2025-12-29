@@ -95,7 +95,11 @@ export default function ProductsPage() {
           {products.map((product) => {
             const inWishlist = wishlistIds.has(product.id)
             return (
-            <div key={product.id} className="relative border rounded-lg p-4 hover:shadow-lg transition-shadow">
+            <div
+              key={product.id}
+              className="relative border rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer"
+              onClick={() => router.push(`/products/${product.id}`)}
+            >
               {inWishlist && (
                 <span className="absolute top-2 right-2 text-xs px-2 py-1 rounded-full bg-pink-100 text-pink-700 border border-pink-200">Saved</span>
               )}
@@ -109,7 +113,10 @@ export default function ProductsPage() {
                     Add to Cart
                   </button>
                   <button
-                    onClick={() => !inWishlist && saveToWishlist(product.id)}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      !inWishlist && saveToWishlist(product.id)
+                    }}
                     disabled={inWishlist || savingId === product.id}
                     className={`px-3 py-2 rounded border text-ink-700 ${
                       inWishlist

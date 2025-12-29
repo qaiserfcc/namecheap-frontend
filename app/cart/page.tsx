@@ -58,28 +58,31 @@ function CartContent() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8">Shopping Cart</h1>
+    <div className="mx-auto flex max-w-6xl flex-col gap-12 px-4 py-8 md:px-6 md:py-16">
+      <div className="space-y-2">
+        <h1 className="text-4xl font-bold leading-tight text-ink-900 md:text-5xl">Shopping Cart</h1>
+        <p className="text-lg text-ink-600">Review and manage your items before checkout.</p>
+      </div>
       
       {!cart || cart.items.length === 0 ? (
-        <div className="text-center text-gray-600 mt-12">
-          <p className="text-xl mb-4">Your cart is empty</p>
-          <p className="text-sm">Add products to see them here.</p>
+        <div className="rounded-2xl border border-dashed border-slate-200 bg-gradient-to-r from-mint-50 via-white to-sky-50 p-12 text-center shadow-sm ring-1 ring-slate-100">
+          <p className="text-xl font-semibold text-ink-700 mb-2">Your cart is empty</p>
+          <p className="text-ink-600">Add products to see them here.</p>
         </div>
       ) : (
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="md:col-span-2">
+        <div className="grid gap-8 lg:grid-cols-3">
+          <div className="lg:col-span-2 space-y-3">
             {cart.items.map((item) => (
-              <div key={item.id} className="border rounded-lg p-4 mb-4 flex items-center gap-4">
-                <div className="w-24 h-24 rounded bg-gradient-to-br from-primary-50 to-mint-50 ring-1 ring-slate-200" />
-                <div className="flex-1">
-                  <h3 className="font-semibold">{item.name}</h3>
-                  <p className="text-gray-600">${item.price}</p>
-                  <p className="text-sm">Quantity: {item.quantity}</p>
+              <div key={item.id} className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow-md">
+                <div className="h-24 w-24 flex-shrink-0 rounded-xl bg-gradient-to-br from-primary-50 to-mint-50 ring-1 ring-slate-200" />
+                <div className="flex-1 space-y-1">
+                  <h3 className="font-semibold text-ink-900">{item.name}</h3>
+                  <p className="text-sm text-ink-600">Qty: {item.quantity}</p>
+                  <p className="text-lg font-medium text-primary-700">${(Number(item.price) * item.quantity).toFixed(2)}</p>
                 </div>
                 <button 
                   onClick={() => handleRemoveItem(item.id)}
-                  className="text-red-600 hover:text-red-800"
+                  className="rounded-lg px-3 py-2 text-sm font-medium text-red-600 transition hover:bg-red-50 hover:text-red-700"
                 >
                   Remove
                 </button>
@@ -87,19 +90,19 @@ function CartContent() {
             ))}
           </div>
           
-          <div className="border rounded-lg p-6 h-fit">
-            <h2 className="text-2xl font-bold mb-4">Order Summary</h2>
-            <div className="space-y-2 mb-4">
-              <div className="flex justify-between">
-                <span>Subtotal:</span>
-                <span>${totals.subtotal.toFixed(2)}</span>
+          <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-mint-50 via-white to-sky-50 p-6 shadow-sm ring-1 ring-slate-100 h-fit">
+            <h2 className="mb-6 text-2xl font-bold text-ink-900">Order Summary</h2>
+            <div className="space-y-4 mb-6">
+              <div className="flex justify-between text-ink-700">
+                <span>Subtotal</span>
+                <span className="font-medium">${totals.subtotal.toFixed(2)}</span>
               </div>
-              <div className="border-t pt-2 flex justify-between font-bold text-lg">
-                <span>Total:</span>
+              <div className="border-t border-slate-200 pt-4 flex justify-between font-bold text-lg text-ink-900">
+                <span>Total</span>
                 <span>${totals.total.toFixed(2)}</span>
               </div>
             </div>
-            <button className="w-full bg-primary-600 text-white py-3 rounded hover:bg-primary-700">
+            <button className="w-full rounded-xl bg-gradient-to-r from-primary-500 to-sky-500 px-5 py-3 text-sm font-semibold text-white shadow-md shadow-primary-200/60 transition hover:shadow-lg hover:-translate-y-0.5">
               Proceed to Checkout
             </button>
           </div>

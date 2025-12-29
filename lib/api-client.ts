@@ -19,6 +19,12 @@ export interface ApiError {
   errors?: Record<string, string[]>;
 }
 
+export type ApiResponseType = 'json' | 'blob';
+
+export type ApiRequestOptions = RequestInit & {
+  responseType?: ApiResponseType;
+};
+
 class ApiClient {
   private baseUrl: string;
 
@@ -28,19 +34,25 @@ class ApiClient {
 
   private async request<T>(
     endpoint: string,
-    options: RequestInit = {}
+    options: ApiRequestOptions = {}
   ): Promise<ApiResponse<T>> {
     const url = `${this.baseUrl}${endpoint}`;
     
-    const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
-    };
+    const headers: Record<string, string> = {};
 
     // Merge existing headers
     if (options.headers) {
       Object.entries(options.headers as Record<string, string>).forEach(([key, value]) => {
         headers[key] = value;
       });
+    }
+
+    const isFormDataBody =
+      typeof FormData !== 'undefined' && options.body instanceof FormData;
+
+    // Default to JSON content type unless caller overrides or sending FormData
+    if (!headers['Content-Type'] && !isFormDataBody) {
+      headers['Content-Type'] = 'application/json';
     }
 
     // Add authentication token if available
@@ -77,7 +89,11 @@ class ApiClient {
         throw errorData;
       }
 
-      const data = await response.json();
+      const responseType = options.responseType || 'json';
+      const data =
+        responseType === 'blob'
+          ? await response.blob()
+          : await response.json();
       return {
         data,
         success: true,
@@ -87,35 +103,53 @@ class ApiClient {
     }
   }
 
-  async get<T>(endpoint: string, options?: RequestInit): Promise<ApiResponse<T>> {
+  async get<T>(endpoint: string, options?: ApiRequestOptions): Promise<ApiResponse<T>> {
     return this.request<T>(endpoint, { ...options, method: 'GET' });
   }
 
-  async post<T>(endpoint: string, data?: any, options?: RequestInit): Promise<ApiResponse<T>> {
+  async post<T>(endpoint: string, data?: any, options?: ApiRequestOptions): Promise<ApiResponse<T>> {
+    const body =
+      data === undefined
+        ? undefined
+        : typeof FormData !== 'undefined' && data instanceof FormData
+          ? data
+          : JSON.stringify(data);
     return this.request<T>(endpoint, {
       ...options,
       method: 'POST',
-      body: JSON.stringify(data),
+      body,
     });
   }
 
-  async put<T>(endpoint: string, data?: any, options?: RequestInit): Promise<ApiResponse<T>> {
+  async put<T>(endpoint: string, data?: any, options?: ApiRequestOptions): Promise<ApiResponse<T>> {
+    const body =
+      data === undefined
+        ? undefined
+        : typeof FormData !== 'undefined' && data instanceof FormData
+          ? data
+          : JSON.stringify(data);
     return this.request<T>(endpoint, {
       ...options,
       method: 'PUT',
-      body: JSON.stringify(data),
+      body,
     });
   }
 
-  async patch<T>(endpoint: string, data?: any, options?: RequestInit): Promise<ApiResponse<T>> {
+  async patch<T>(endpoint: string, data?: any, options?: ApiRequestOptions): Promise<ApiResponse<T>> {
+    const body =
+      data === undefined
+        ? undefined
+        : typeof FormData !== 'undefined' && data instanceof FormData
+          ? data
+          : JSON.stringify(data);
     return this.request<T>(endpoint, {
       ...options,
       method: 'PATCH',
-      body: JSON.stringify(data),
+      body,
     });
   }
 
-  async delete<T>(endpoint: string, options?: RequestInit): Promise<ApiResponse<T>> {
+  async delete<T>(endpoint: string, options?: ApiRequestOptions): Promise<ApiResponse<T>> {
     return this.request<T>(endpoint, { ...options, method: 'DELETE' });
   }
 }
