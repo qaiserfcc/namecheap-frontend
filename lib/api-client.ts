@@ -5,7 +5,7 @@
  * The backend API URL should be set via the NEXT_PUBLIC_API_URL environment variable.
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
 export interface ApiResponse<T> {
   data: T;
@@ -62,6 +62,18 @@ class ApiClient {
           message: 'An error occurred',
           statusCode: response.status,
         }));
+
+        // Auto-logout on 401 and redirect to login
+        if (response.status === 401 && typeof window !== 'undefined') {
+          try {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('user');
+          } catch {}
+          const current = window.location.pathname + window.location.search;
+          const redirect = encodeURIComponent(current);
+          window.location.assign(`/auth/login?redirect=${redirect}`);
+        }
+
         throw errorData;
       }
 
