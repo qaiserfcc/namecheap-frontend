@@ -44,21 +44,21 @@ export const authService = {
   async logout() {
     localStorage.removeItem('authToken');
     localStorage.removeItem('user');
-    return apiClient.post('/api/auth/logout');
+    return { success: true };
   },
 
   /**
    * Get current user
    */
   async getCurrentUser() {
-    return apiClient.get<User>('/api/auth/me');
+    return apiClient.get<User>('/api/auth/profile');
   },
 
   /**
    * Refresh token
    */
   async refreshToken() {
-    return apiClient.post<{ token: string }>('/api/auth/refresh');
+    throw new Error('Refresh token not implemented');
   },
 
   /**

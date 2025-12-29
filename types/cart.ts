@@ -1,21 +1,20 @@
-import { Product } from './product';
-
 export interface CartItem {
-  id: string;
-  productId: string;
-  product: Product;
+  id: number | string;
+  productId: number | string;
+  name: string;
+  description?: string;
+  imageUrl?: string;
   quantity: number;
   price: number;
 }
 
 export interface Cart {
-  id: string;
-  userId: string;
+  id: number | string;
   items: CartItem[];
-  subtotal: number;
-  discount: number;
-  total: number;
+  subtotal?: number;
+  discount?: number;
+  total: number | string;
   discountCode?: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

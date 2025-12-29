@@ -1,10 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { RequireAuth } from '@/components/auth/RequireAuth'
 import { cartService } from '@/services/cart.service'
 import { Cart } from '@/types/cart'
 
-export default function CartPage() {
+function CartContent() {
   const [cart, setCart] = useState<Cart | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -25,7 +26,7 @@ export default function CartPage() {
     }
   }
 
-  const handleRemoveItem = async (itemId: string) => {
+  const handleRemoveItem = async (itemId: string | number) => {
     try {
       await cartService.removeFromCart(itemId)
       loadCart()
@@ -33,6 +34,12 @@ export default function CartPage() {
       alert('Failed to remove item')
     }
   }
+
+  const totals = useMemo(() => {
+    if (!cart) return { subtotal: 0, total: 0 }
+    const subtotal = cart.items.reduce((sum, item) => sum + Number(item.price) * item.quantity, 0)
+    return { subtotal, total: subtotal }
+  }, [cart])
 
   if (loading) {
     return (
@@ -57,16 +64,16 @@ export default function CartPage() {
       {!cart || cart.items.length === 0 ? (
         <div className="text-center text-gray-600 mt-12">
           <p className="text-xl mb-4">Your cart is empty</p>
-          <p className="text-sm">Cart items will appear here once the backend is connected</p>
+          <p className="text-sm">Add products to see them here.</p>
         </div>
       ) : (
         <div className="grid md:grid-cols-3 gap-8">
           <div className="md:col-span-2">
             {cart.items.map((item) => (
               <div key={item.id} className="border rounded-lg p-4 mb-4 flex items-center gap-4">
-                <div className="w-24 h-24 bg-gray-200 rounded"></div>
+                <div className="w-24 h-24 rounded bg-gradient-to-br from-primary-50 to-mint-50 ring-1 ring-slate-200" />
                 <div className="flex-1">
-                  <h3 className="font-semibold">{item.product.name}</h3>
+                  <h3 className="font-semibold">{item.name}</h3>
                   <p className="text-gray-600">${item.price}</p>
                   <p className="text-sm">Quantity: {item.quantity}</p>
                 </div>
@@ -85,17 +92,11 @@ export default function CartPage() {
             <div className="space-y-2 mb-4">
               <div className="flex justify-between">
                 <span>Subtotal:</span>
-                <span>${cart.subtotal}</span>
+                <span>${totals.subtotal.toFixed(2)}</span>
               </div>
-              {cart.discount > 0 && (
-                <div className="flex justify-between text-green-600">
-                  <span>Discount:</span>
-                  <span>-${cart.discount}</span>
-                </div>
-              )}
               <div className="border-t pt-2 flex justify-between font-bold text-lg">
                 <span>Total:</span>
-                <span>${cart.total}</span>
+                <span>${totals.total.toFixed(2)}</span>
               </div>
             </div>
             <button className="w-full bg-primary-600 text-white py-3 rounded hover:bg-primary-700">
@@ -105,5 +106,13 @@ export default function CartPage() {
         </div>
       )}
     </div>
+  )
+}
+
+export default function CartPage() {
+  return (
+    <RequireAuth>
+      <CartContent />
+    </RequireAuth>
   )
 }

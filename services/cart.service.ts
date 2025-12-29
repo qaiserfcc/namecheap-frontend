@@ -1,6 +1,27 @@
 import { apiClient } from '@/lib/api-client';
 import { Cart, CartItem } from '@/types/cart';
 
+const mapCart = (data: any): Cart => {
+  const items: CartItem[] = (data.items || []).map((item: any) => ({
+    id: item.id,
+    productId: item.product_id,
+    name: item.name,
+    description: item.description,
+    imageUrl: item.image_url,
+    quantity: item.quantity,
+    price: Number(item.price),
+  }));
+
+  const subtotal = items.reduce((sum, i) => sum + Number(i.price) * i.quantity, 0);
+
+  return {
+    id: data.id,
+    items,
+    subtotal,
+    total: Number(data.total ?? subtotal),
+  };
+};
+
 /**
  * Cart Service
  * 
@@ -12,28 +33,32 @@ export const cartService = {
    * Get user's cart
    */
   async getCart() {
-    return apiClient.get<Cart>('/api/cart');
+    const response = await apiClient.get<Cart>('/api/cart');
+    return { ...response, data: mapCart(response.data) };
   },
 
   /**
    * Add item to cart
    */
-  async addToCart(productId: string, quantity: number) {
-    return apiClient.post<Cart>('/api/cart/items', { productId, quantity });
+  async addToCart(productId: string | number, quantity: number) {
+    const response = await apiClient.post<Cart>('/api/cart/items', { productId, quantity });
+    return { ...response, data: mapCart(response.data) };
   },
 
   /**
    * Update cart item quantity
    */
-  async updateCartItem(itemId: string, quantity: number) {
-    return apiClient.put<Cart>(`/api/cart/items/${itemId}`, { quantity });
+  async updateCartItem(itemId: string | number, quantity: number) {
+    const response = await apiClient.put<Cart>(`/api/cart/items/${itemId}`, { quantity });
+    return { ...response, data: mapCart(response.data) };
   },
 
   /**
    * Remove item from cart
    */
-  async removeFromCart(itemId: string) {
-    return apiClient.delete<Cart>(`/api/cart/items/${itemId}`);
+  async removeFromCart(itemId: string | number) {
+    const response = await apiClient.delete<Cart>(`/api/cart/items/${itemId}`);
+    return { ...response, data: mapCart(response.data) };
   },
 
   /**

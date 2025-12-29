@@ -2,10 +2,13 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { authService } from '@/services/auth.service'
+import { useSearchParams } from 'next/navigation'
+import { useAuth } from '@/components/auth/AuthProvider'
 
 export default function LoginPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const { login } = useAuth()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -19,8 +22,9 @@ export default function LoginPage() {
     setError(null)
 
     try {
-      await authService.login(formData)
-      router.push('/')
+      await login(formData)
+      const redirect = searchParams.get('redirect')
+      router.push(redirect || '/')
     } catch (err: any) {
       setError(err.message || 'Login failed')
     } finally {

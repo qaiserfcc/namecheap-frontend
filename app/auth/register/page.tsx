@@ -2,10 +2,11 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { authService } from '@/services/auth.service'
+import { useAuth } from '@/components/auth/AuthProvider'
 
 export default function RegisterPage() {
   const router = useRouter()
+  const { register } = useAuth()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -21,7 +22,7 @@ export default function RegisterPage() {
     setError(null)
 
     try {
-      await authService.register(formData)
+      await register(formData)
       router.push('/')
     } catch (err: any) {
       setError(err.message || 'Registration failed')

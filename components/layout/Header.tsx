@@ -1,6 +1,11 @@
+'use client'
+
 import Link from 'next/link'
+import { useAuth } from '@/components/auth/AuthProvider'
 
 export default function Header() {
+  const { isAuthenticated, user, logout } = useAuth()
+
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur-md shadow-sm">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-6">
@@ -20,15 +25,29 @@ export default function Header() {
         </div>
 
         <div className="flex items-center space-x-3 text-sm">
-          <Link href="/auth/login" className="px-3 py-2 rounded-lg text-ink-700 hover:bg-slate-100 transition">
-            Login
-          </Link>
-          <Link 
-            href="/auth/register"
-            className="px-4 py-2 rounded-lg bg-gradient-to-r from-primary-500 to-sky-500 text-white shadow-sm hover:shadow-md transition"
-          >
-            Create account
-          </Link>
+          {isAuthenticated ? (
+            <>
+              <span className="hidden sm:inline text-ink-700">Hi, {user?.firstName || user?.email}</span>
+              <button
+                onClick={logout}
+                className="px-3 py-2 rounded-lg text-ink-700 hover:bg-slate-100 transition"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link href="/auth/login" className="px-3 py-2 rounded-lg text-ink-700 hover:bg-slate-100 transition">
+                Login
+              </Link>
+              <Link 
+                href="/auth/register"
+                className="px-4 py-2 rounded-lg bg-gradient-to-r from-primary-500 to-sky-500 text-white shadow-sm hover:shadow-md transition"
+              >
+                Create account
+              </Link>
+            </>
+          )}
         </div>
       </nav>
     </header>
