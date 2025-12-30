@@ -3,13 +3,17 @@ export interface Product {
   name: string;
   description: string;
   price: number;
+  discountPrice?: number; // originalPrice in ProductCard
   category: string;
-  images: string[];
+  image?: string; // imageUrl in ProductCard
+  images?: string[];
   stock: number;
-  sku: string;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
+  rating?: number;
+  reviews?: number; // reviewCount in ProductCard
+  sku?: string;
+  isActive?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface ProductFilter {
