@@ -1,46 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Primary Colors */
-  --primary-blue: #0066CC;
-  --primary-dark: #004B99;
-  --primary-light: #3385D6;
-  
-  /* Secondary Colors */
-  --secondary-green: #00A86B;
-  --secondary-orange: #FF6B35;
-  --secondary-purple: #8B5CF6;
-  
+  /* Primary Palette - organic greens */
+  --primary-forest: #1f5132;
+  --primary-leaf: #2f855a;
+  --primary-mint: #7ac57b;
+
+  /* Accent Palette */
+  --accent-citrus: #f59e0b;
+  --accent-berry: #d9488b;
+  --accent-earth: #b08968;
+
   /* Neutral Colors */
-  --gray-900: #1A202C;
-  --gray-800: #2D3748;
-  --gray-700: #4A5568;
-  --gray-600: #718096;
-  --gray-500: #A0AEC0;
-  --gray-400: #CBD5E0;
-  --gray-300: #E2E8F0;
-  --gray-200: #EDF2F7;
-  --gray-100: #F7FAFC;
-  --white: #FFFFFF;
-  
+  --gray-900: #111827;
+  --gray-800: #1f2937;
+  --gray-700: #374151;
+  --gray-600: #4b5563;
+  --gray-500: #6b7280;
+  --gray-400: #9ca3af;
+  --gray-300: #d1d5db;
+  --gray-200: #e5e7eb;
+  --gray-100: #f3f4f6;
+  --white: #ffffff;
+
   /* Semantic Colors */
-  --success: #48BB78;
-  --warning: #F6AD55;
-  --error: #F56565;
-  --info: #4299E1;
-  
+  --success: #15803d;
+  --warning: #d97706;
+  --error: #dc2626;
+  --info: #2563eb;
+
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #0066CC 0%, #8B5CF6 100%);
-  --gradient-success: linear-gradient(135deg, #00A86B 0%, #48BB78 100%);
-  --gradient-sunset: linear-gradient(135deg, #FF6B35 0%, #F6AD55 100%);
-  
+  --gradient-primary: linear-gradient(130deg, #1f5132 0%, #2f855a 45%, #7ac57b 100%);
+  --gradient-gold: linear-gradient(140deg, #f59e0b 0%, #fbbf24 60%, #fed7aa 100%);
+  --gradient-berry: linear-gradient(135deg, #d9488b 0%, #f59e0b 100%);
+  --gradient-forest: radial-gradient(circle at 10% 20%, rgba(122, 197, 123, 0.2), transparent 35%),
+    radial-gradient(circle at 90% 10%, rgba(31, 81, 50, 0.15), transparent 30%),
+    radial-gradient(circle at 50% 80%, rgba(176, 137, 104, 0.15), transparent 35%),
+    #f7f8f5;
+
   /* Font Families */
-  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-heading: 'Poppins', 'Inter', sans-serif;
+  --font-primary: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Playfair Display', 'Manrope', sans-serif;
   --font-mono: 'Fira Code', 'Monaco', monospace;
 
   /* Font Sizes */
@@ -99,7 +103,7 @@
 body {
   font-family: var(--font-primary);
   color: var(--gray-900);
-  background: var(--gray-100);
+  background: var(--gradient-forest);
   min-height: 100vh;
   line-height: 1.6;
 }
@@ -118,7 +122,7 @@ a {
 }
 
 a:hover {
-  color: var(--primary-blue);
+  color: var(--primary-leaf);
 }
 
 .container {
@@ -148,13 +152,13 @@ a:hover {
 }
 
 .btn-primary {
-  background: var(--primary-blue);
+  background: var(--gradient-primary);
   color: var(--white);
   box-shadow: var(--shadow-md);
 }
 
 .btn-primary:hover {
-  background: var(--primary-dark);
+  background: var(--primary-leaf);
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
   color: var(--white);
@@ -162,12 +166,12 @@ a:hover {
 
 .btn-secondary {
   background: transparent;
-  color: var(--primary-blue);
-  border: 2px solid var(--primary-blue);
+  color: var(--primary-forest);
+  border: 2px solid var(--primary-forest);
 }
 
 .btn-secondary:hover {
-  background: var(--primary-blue);
+  background: var(--primary-forest);
   color: var(--white);
 }
 

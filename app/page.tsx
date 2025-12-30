@@ -46,55 +46,55 @@ export default function Home() {
 
   const categories = [
     {
-      title: 'Domains',
-      description: 'Register your perfect domain name',
-      icon: '🌐',
-      href: '/products?category=domains',
-      gradient: 'from-blue-500 to-cyan-500',
+      title: 'Fresh Harvest',
+      description: 'Organic fruits & vegetables picked in-season.',
+      icon: '🥬',
+      href: '/products?category=produce',
+      gradient: 'from-emerald-500 to-lime-500',
     },
     {
-      title: 'Hosting',
-      description: 'Reliable hosting solutions',
-      icon: '⚡',
-      href: '/products?category=hosting',
-      gradient: 'from-purple-500 to-pink-500',
+      title: 'Pantry Staples',
+      description: 'Clean grains, pulses, oils, and baking essentials.',
+      icon: '🥖',
+      href: '/products?category=pantry',
+      gradient: 'from-amber-500 to-orange-400',
     },
     {
-      title: 'Security',
-      description: 'SSL & privacy protection',
-      icon: '🔒',
-      href: '/products?category=security',
-      gradient: 'from-green-500 to-emerald-500',
+      title: 'Wellness',
+      description: 'Adaptogens, herbal teas, and daily supplements.',
+      icon: '🍵',
+      href: '/products?category=wellness',
+      gradient: 'from-teal-500 to-cyan-400',
     },
     {
-      title: 'Email',
-      description: 'Professional email services',
-      icon: '✉️',
-      href: '/products?category=email',
-      gradient: 'from-orange-500 to-red-500',
+      title: 'Bundles',
+      description: 'Chef-curated boxes for weekly cooking and gifting.',
+      icon: '🎁',
+      href: '/products?category=bundles',
+      gradient: 'from-rose-400 to-amber-400',
     },
   ];
 
   const features = [
     {
-      title: '24/7 Support',
-      description: 'Expert support whenever you need it',
-      icon: '💬',
+      title: 'Soil-First Sourcing',
+      description: 'Partner farms use regenerative practices for richer soil and better nutrition.',
+      icon: '🪴',
     },
     {
-      title: 'Money-Back Guarantee',
-      description: '30-day risk-free trial on all products',
-      icon: '💰',
+      title: 'Plastic-Lite Packaging',
+      description: 'Compostable bags and glass jars where possible.',
+      icon: '📦',
     },
     {
-      title: 'Easy Migration',
-      description: 'Free website migration assistance',
-      icon: '🚀',
+      title: 'Cold-Chain Delivery',
+      description: 'Chilled logistics keep greens crisp and dairy fresh.',
+      icon: '❄️',
     },
     {
-      title: 'Free Tools',
-      description: 'Access to premium tools and resources',
-      icon: '🛠️',
+      title: 'Chef Notes',
+      description: 'Cooking tips and pairings with every product detail.',
+      icon: '🧑‍🍳',
     },
   ];
 
@@ -102,24 +102,24 @@ export default function Home() {
     <main>
       {/* Hero Section */}
       <Hero
-        title={content?.hero?.title || 'Your Perfect Domain Starts Here'}
-        subtitle={content?.hero?.subtitle || 'Find, register, and manage your domain with ease. Join millions of satisfied customers worldwide.'}
-        ctaText="Browse Domains"
+        title={content?.hero?.title || 'Organic groceries, delivered with care'}
+        subtitle={content?.hero?.subtitle || 'Shop regenerative produce, pantry staples, and wellness essentials sourced directly from trusted farms.'}
+        ctaText="Shop Seasonal Picks"
         ctaLink="/products"
-        secondaryCtaText="Learn More"
+        secondaryCtaText="See Our Farms"
         secondaryCtaLink="/about"
         backgroundImage="/hero-bg.jpg"
       />
 
       {/* Stats Section */}
       <StatsSection
-        title="Trusted by Millions"
-        subtitle="Join the world's leading domain and hosting platform"
+        title="Grown with intention"
+        subtitle="A marketplace that supports farmers, chefs, and conscious households"
         stats={content?.stats || [
-          { label: 'Active Domains', value: '2M+' },
-          { label: 'Happy Customers', value: '500K+' },
-          { label: 'Orders Completed', value: '5M+' },
-          { label: 'Satisfaction Rate', value: '99%' },
+          { label: 'Local Farms', value: '120+' },
+          { label: 'Happy Households', value: '85K+' },
+          { label: 'Plastic Saved', value: '18T' },
+          { label: 'Avg. Repeat Rate', value: '92%' },
         ]}
       />
 
@@ -127,8 +127,8 @@ export default function Home() {
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4" style={{ color: 'var(--gray-900)' }}>Featured Products</h2>
-            <p className="text-lg" style={{ color: 'var(--gray-600)' }}>Discover our most popular services</p>
+            <h2 className="text-4xl font-bold mb-3 text-gray-900">Seasonal highlights</h2>
+            <p className="text-lg text-gray-600">Fresh picks rotating weekly with chef pairings and bundle discounts.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {featuredProducts.map((product) => (
@@ -137,36 +137,33 @@ export default function Home() {
           </div>
           <div className="text-center mt-10">
             <Link href="/products" className="btn btn-primary">
-              View All Products
+              Browse full catalog
             </Link>
           </div>
         </div>
       </section>
 
       {/* Categories */}
-      <section className="py-16 px-4" style={{ backgroundColor: 'var(--gray-100)' }}>
+      <section className="py-16 px-4 bg-white/70">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4" style={{ color: 'var(--gray-900)' }}>Browse by Category</h2>
-            <p className="text-lg" style={{ color: 'var(--gray-600)' }}>Find exactly what you need</p>
+            <h2 className="text-4xl font-bold mb-3 text-gray-900">Shop by collection</h2>
+            <p className="text-lg text-gray-600">Follow the season or stock up on pantry essentials.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {categories.map((category) => (
               <Link
                 key={category.title}
                 href={category.href}
-                className="group relative overflow-hidden rounded-2xl bg-white p-8 text-center transition-all hover:shadow-xl hover:-translate-y-1"
-                style={{ border: '1px solid var(--gray-200)' }}
+                className="group relative overflow-hidden rounded-2xl bg-white p-8 text-center transition-all hover:shadow-xl hover:-translate-y-1 border border-gray-200"
               >
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-5 group-hover:opacity-10 transition-opacity`}
+                  className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-10 group-hover:opacity-20 transition-opacity`}
                 ></div>
                 <div className="relative">
                   <div className="text-5xl mb-4">{category.icon}</div>
-                  <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--gray-900)' }}>
-                    {category.title}
-                  </h3>
-                  <p style={{ color: 'var(--gray-600)' }}>{category.description}</p>
+                  <h3 className="text-xl font-bold mb-2 text-gray-900">{category.title}</h3>
+                  <p className="text-gray-600">{category.description}</p>
                 </div>
               </Link>
             ))}
@@ -178,21 +175,18 @@ export default function Home() {
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4" style={{ color: 'var(--gray-900)' }}>Why Choose Us</h2>
-            <p className="text-lg" style={{ color: 'var(--gray-600)' }}>We make domain management simple and reliable</p>
+            <h2 className="text-4xl font-bold mb-3 text-gray-900">Why shop with us</h2>
+            <p className="text-lg text-gray-600">Sustainable sourcing, thoughtful packaging, and chef-led inspiration.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature) => (
               <div
                 key={feature.title}
-                className="text-center p-6 rounded-xl transition-all hover:shadow-lg"
-                style={{ backgroundColor: 'var(--white)', border: '1px solid var(--gray-200)' }}
+                className="text-center p-6 rounded-xl transition-all hover:shadow-lg bg-white border border-gray-200"
               >
                 <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--gray-900)' }}>
-                  {feature.title}
-                </h3>
-                <p style={{ color: 'var(--gray-600)' }}>{feature.description}</p>
+                <h3 className="text-xl font-bold mb-2 text-gray-900">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -209,31 +203,22 @@ export default function Home() {
       )}
 
       {/* CTA Section */}
-      <section
-        className="py-20 px-4 text-center text-white"
-        style={{ background: 'var(--gradient-primary)' }}
-      >
+      <section className="py-20 px-4 text-center text-white" style={{ background: 'var(--gradient-primary)' }}>
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold mb-4">Ready to Get Started?</h2>
-          <p className="text-xl mb-8 opacity-90">
-            Find your perfect domain and launch your online presence today
-          </p>
+          <h2 className="text-4xl font-bold mb-4">Ready for your next market day?</h2>
+          <p className="text-xl mb-8 opacity-95">Fill your basket with organic essentials and seasonal surprises.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/products"
-              className="px-8 py-4 bg-white rounded-xl font-semibold transition-all hover:shadow-xl hover:-translate-y-1"
-              style={{ color: 'var(--primary-blue)' }}
+              className="px-8 py-4 bg-white rounded-xl font-semibold text-[var(--primary-forest)] transition-all hover:shadow-xl hover:-translate-y-1"
             >
-              Browse Products
+              Start shopping
             </Link>
             <Link
               href="/auth/register"
-              className="px-8 py-4 bg-transparent border-2 border-white rounded-xl font-semibold text-white transition-all hover:bg-white hover:-translate-y-1"
-              style={{ '--hover-color': 'var(--primary-blue)' } as any}
-              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--primary-blue)')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'white')}
+              className="px-8 py-4 border-2 border-white rounded-xl font-semibold text-white transition-all hover:bg-white hover:text-[var(--primary-forest)] hover:-translate-y-1"
             >
-              Create Account
+              Create account
             </Link>
           </div>
         </div>

@@ -1,28 +1,23 @@
-/**
- * Footer Component
- * Site footer with links, social media, and copyright
- */
-
-import Link from 'next/link';
+import Link from 'next/link'
 
 export default function Footer() {
   const footerLinks = {
     shop: [
       { label: 'All Products', href: '/products' },
-      { label: 'New Arrivals', href: '/products?filter=new' },
-      { label: 'Best Sellers', href: '/products?filter=bestsellers' },
-      { label: 'Sale', href: '/products?filter=sale' },
+      { label: 'Seasonal Harvest', href: '/products?filter=seasonal' },
+      { label: 'Pantry Staples', href: '/products?filter=pantry' },
+      { label: 'Wellness', href: '/products?filter=wellness' },
     ],
     company: [
-      { label: 'About Us', href: '/about' },
-      { label: 'Contact', href: '/contact' },
-      { label: 'Careers', href: '/careers' },
+      { label: 'Our Farms', href: '/about' },
+      { label: 'Sourcing', href: '/about?sourcing=true' },
       { label: 'Blog', href: '/blog' },
+      { label: 'Contact', href: '/contact' },
     ],
     support: [
       { label: 'Help Center', href: '/help' },
-      { label: 'Shipping Info', href: '/shipping' },
-      { label: 'Returns', href: '/returns' },
+      { label: 'Shipping & Delivery', href: '/shipping' },
+      { label: 'Returns & Exchanges', href: '/returns' },
       { label: 'FAQ', href: '/faq' },
     ],
     legal: [
@@ -30,38 +25,38 @@ export default function Footer() {
       { label: 'Terms of Service', href: '/terms' },
       { label: 'Cookie Policy', href: '/cookies' },
     ],
-  };
+  }
 
   const socialLinks = [
-    { name: 'Facebook', icon: 'F', href: '#' },
-    { name: 'Twitter', icon: 'T', href: '#' },
-    { name: 'Instagram', icon: 'I', href: '#' },
-    { name: 'LinkedIn', icon: 'L', href: '#' },
-  ];
+    { name: 'Instagram', icon: '📸', href: '#' },
+    { name: 'Pinterest', icon: '📌', href: '#' },
+    { name: 'LinkedIn', icon: '💼', href: '#' },
+    { name: 'YouTube', icon: '▶️', href: '#' },
+  ]
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-gray-900 text-gray-200">
       <div className="container py-16">
-        {/* Top Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
-          {/* Brand */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4 group">
-              <div className="w-10 h-10 bg-gradient-to-br from-[var(--primary-blue)] to-[var(--secondary-purple)] rounded-lg flex items-center justify-center text-white font-bold text-xl group-hover:scale-110 transition-transform">
-                N
+            <Link href="/" className="flex items-center gap-3 mb-4 group">
+              <div className="w-12 h-12 bg-gradient-to-br from-[var(--primary-forest)] via-[var(--primary-leaf)] to-[var(--primary-mint)] rounded-xl flex items-center justify-center text-white font-bold text-xl group-hover:scale-110 transition-transform">
+                🌱
               </div>
-              <span className="text-2xl font-bold text-white">NameCheap</span>
+              <div>
+                <span className="text-2xl font-bold text-white block">Verdant Market</span>
+                <span className="text-xs uppercase tracking-[0.2em] text-gray-400">Organic Living</span>
+              </div>
             </Link>
-            <p className="text-sm mb-6">
-              Your trusted e-commerce partner for quality products at unbeatable prices.
+            <p className="text-sm mb-6 text-gray-400">
+              Harvest-fresh produce, clean pantry staples, and eco-friendly essentials sourced directly from regenerative farms.
             </p>
-            {/* Social Links */}
             <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
-                  className="w-10 h-10 bg-gray-800 hover:bg-[var(--primary-blue)] rounded-lg flex items-center justify-center text-white font-semibold transition-all duration-300 hover:scale-110"
+                  className="w-10 h-10 bg-gray-800 hover:bg-[var(--primary-leaf)] rounded-lg flex items-center justify-center text-white font-semibold transition-all duration-300 hover:scale-110"
                   aria-label={social.name}
                 >
                   {social.icon}
@@ -70,89 +65,38 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Shop Links */}
-          <div>
-            <h3 className="font-semibold text-white text-lg mb-4">Shop</h3>
-            <ul className="space-y-2">
-              {footerLinks.shop.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company Links */}
-          <div>
-            <h3 className="font-semibold text-white text-lg mb-4">Company</h3>
-            <ul className="space-y-2">
-              {footerLinks.company.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Support Links */}
-          <div>
-            <h3 className="font-semibold text-white text-lg mb-4">Support</h3>
-            <ul className="space-y-2">
-              {footerLinks.support.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal Links */}
-          <div>
-            <h3 className="font-semibold text-white text-lg mb-4">Legal</h3>
-            <ul className="space-y-2">
-              {footerLinks.legal.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {Object.entries(footerLinks).map(([section, links]) => (
+            <div key={section}>
+              <h3 className="font-semibold text-white text-lg mb-4 capitalize">{section}</h3>
+              <ul className="space-y-2">
+                {links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-gray-400 hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {/* Newsletter */}
         <div className="border-t border-gray-800 pt-8 mb-8">
           <div className="max-w-2xl mx-auto text-center">
-            <h3 className="font-semibold text-white text-xl mb-4">
-              Subscribe to Our Newsletter
+            <h3 className="font-semibold text-white text-xl mb-3">
+              Join the Harvest Letter
             </h3>
-            <p className="text-sm mb-6">
-              Get the latest updates on new products and upcoming sales
+            <p className="text-sm text-gray-400 mb-6">
+              Weekly recipes, farm stories, and early access to limited seasonal drops.
             </p>
-            <form className="flex gap-3 max-w-md mx-auto">
+            <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
               <input
                 type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 focus:border-[var(--primary-blue)] focus:outline-none text-white"
+                placeholder="Your email address"
+                className="flex-1 px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 focus:border-[var(--primary-leaf)] focus:outline-none text-white"
               />
               <button
                 type="submit"
@@ -164,16 +108,15 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-          <p>&copy; {new Date().getFullYear()} NameCheap. All rights reserved.</p>
+        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+          <p>&copy; {new Date().getFullYear()} Verdant Market. Grown with care.</p>
           <div className="flex gap-6">
-            <span>🔒 Secure Payment</span>
-            <span>🚚 Free Shipping over $50</span>
-            <span>↩️ Easy Returns</span>
+            <span>🌿 Regenerative farms</span>
+            <span>🚚 Free delivery over $50</span>
+            <span>↩️ 14-day easy returns</span>
           </div>
         </div>
       </div>
     </footer>
-  );
+  )
 }

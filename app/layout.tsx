@@ -6,8 +6,8 @@ import { AuthProvider } from '@/components/auth/AuthProvider'
 import { ToastProvider } from '@/components/ui/Toast'
 
 export const metadata: Metadata = {
-  title: 'Namecheap E-commerce',
-  description: 'Modern e-commerce platform with microservices architecture',
+  title: 'Verdant Market | Organic Goods',
+  description: 'Organic produce, pantry, and wellness essentials with seamless shopping.',
 }
 
 export default function RootLayout({
