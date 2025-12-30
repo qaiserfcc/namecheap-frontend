@@ -1,4 +1,4 @@
-import { apiClient } from '@/lib/api-client';
+import { apiClient } from '@/lib/api';
 import { Cart, CartItem } from '@/types/cart';
 
 const mapCart = (data: any): Cart => {

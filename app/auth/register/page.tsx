@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/components/auth/AuthProvider'
 
-export default function RegisterPage() {
+function RegisterPageContent() {
   const router = useRouter()
   const { register } = useAuth()
   const [formData, setFormData] = useState({
@@ -118,5 +118,13 @@ export default function RegisterPage() {
         </p>
       </div>
     </div>
+  )
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+      <RegisterPageContent />
+    </Suspense>
   )
 }

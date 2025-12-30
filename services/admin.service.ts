@@ -1,9 +1,9 @@
-import { apiClient } from '@/lib/api-client';
+import { apiClient } from '@/lib/api';
 import type { AdminStats, Product, ProductVariant, Order, User, Discount, CSVProduct } from '@/types/admin';
 
 class AdminService {
   async getDashboardStats(): Promise<AdminStats> {
-    const response = await apiClient.get('/api/admin/dashboard');
+    const response = await apiClient.get<AdminStats>('/api/admin/dashboard');
     return response.data;
   }
 

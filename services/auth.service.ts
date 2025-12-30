@@ -1,4 +1,4 @@
-import { apiClient } from '@/lib/api-client';
+import { apiClient } from '@/lib/api';
 import { User, LoginCredentials, RegisterData } from '@/types/auth';
 
 /**
@@ -15,7 +15,7 @@ export const authService = {
     const response = await apiClient.post<{ user: User; token: string }>('/api/auth/login', credentials);
     
     // Store token in localStorage
-    if (response.success && response.data.token) {
+    if (response.data.token) {
       localStorage.setItem('authToken', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
     }
@@ -30,7 +30,7 @@ export const authService = {
     const response = await apiClient.post<{ user: User; token: string }>('/api/auth/register', data);
     
     // Store token in localStorage
-    if (response.success && response.data.token) {
+    if (response.data.token) {
       localStorage.setItem('authToken', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
     }

@@ -25,8 +25,12 @@ export default function ProductDetailPage() {
       if (!params.id) return
       try {
         setLoading(true)
-        const response = await productService.getProductById(params.id as string)
-        setProduct(response.data)
+        const product = await productService.getProductById(params.id as string)
+        if (product) {
+          setProduct(product)
+        } else {
+          setError('Product not found')
+        }
       } catch (err: any) {
         setError(err.message || 'Failed to load product')
       } finally {

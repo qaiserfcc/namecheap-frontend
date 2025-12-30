@@ -59,27 +59,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [isLoading, user, pathname, router]);
 
   const login = useCallback(async (credentials: LoginCredentials) => {
-    const response = await authService.login(credentials);
-
-    if (response.success && response.data.token) {
-      setUser(response.data.user);
-      setToken(response.data.token);
-      return;
+    try {
+      const response = await authService.login(credentials);
+      if (response.data.token) {
+        setUser(response.data.user);
+        setToken(response.data.token);
+        return;
+      }
+      throw new Error('No token in response');
+    } catch (error: any) {
+      throw new Error(error.response?.data?.message || error.message || 'Unable to login');
     }
-
-    throw new Error(response.message || 'Unable to login');
   }, []);
 
   const register = useCallback(async (data: RegisterData) => {
-    const response = await authService.register(data);
-
-    if (response.success && response.data.token) {
-      setUser(response.data.user);
-      setToken(response.data.token);
-      return;
+    try {
+      const response = await authService.register(data);
+      if (response.data.token) {
+        setUser(response.data.user);
+        setToken(response.data.token);
+        return;
+      }
+      throw new Error('No token in response');
+    } catch (error: any) {
+      throw new Error(error.response?.data?.message || error.message || 'Unable to register');
     }
-
-    throw new Error(response.message || 'Unable to register');
   }, []);
 
   const logout = useCallback(async () => {

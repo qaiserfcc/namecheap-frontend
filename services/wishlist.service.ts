@@ -1,4 +1,4 @@
-import { apiClient } from '@/lib/api-client';
+import { apiClient } from '@/lib/api';
 import { Wishlist, WishlistItem } from '@/types/wishlist';
 
 const mapWishlist = (data: any): Wishlist => {
